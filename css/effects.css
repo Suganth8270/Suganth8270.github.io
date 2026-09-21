@@ -1,0 +1,89 @@
+/* ==========================================================================
+   EFFECTS — background atmosphere, cursor glow, scroll reveal,
+   and the prefers-reduced-motion overrides.
+   ========================================================================== */
+
+/* ---------- background stack ------------------------------------------------ */
+.bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+
+/* Slow-moving coloured light. Only `transform` animates, so it stays on the GPU. */
+.bg__orb { position: absolute; border-radius: 50%; will-change: transform; }
+.bg__orb--a {
+  width: 82vmax; height: 82vmax; left: -28vmax; top: -34vmax;
+  background: radial-gradient(circle, rgba(63, 143, 97, 0.28), rgba(63, 143, 97, 0) 62%);
+  animation: orb-a 46s ease-in-out infinite alternate;
+}
+.bg__orb--b {
+  width: 70vmax; height: 70vmax; right: -26vmax; top: 18vh;
+  background: radial-gradient(circle, rgba(120, 165, 106, 0.22), rgba(120, 165, 106, 0) 62%);
+  animation: orb-b 58s ease-in-out infinite alternate;
+}
+.bg__orb--c {
+  width: 60vmax; height: 60vmax; left: 20vw; bottom: -36vmax;
+  background: radial-gradient(circle, rgba(180, 125, 93, 0.16), rgba(180, 125, 93, 0) 62%);
+  animation: orb-c 64s ease-in-out infinite alternate;
+}
+@keyframes orb-a { to { transform: translate3d(9vw, 8vh, 0) scale(1.1); } }
+@keyframes orb-b { to { transform: translate3d(-10vw, -7vh, 0) scale(1.16); } }
+@keyframes orb-c { to { transform: translate3d(8vw, -9vh, 0) scale(1.08); } }
+
+/* very subtle lab grid (slightly oversized so its parallax shift never shows an edge) */
+.bg__grid {
+  position: absolute; inset: -64px;
+  background-image:
+    linear-gradient(rgba(245, 243, 231, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245, 243, 231, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 34%, #000 18%, transparent 78%);
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 34%, #000 18%, transparent 78%);
+  will-change: transform;
+}
+#bg-canvas { position: absolute; inset: 0; }
+.bg__vignette {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 40%, transparent 45%, rgba(2, 4, 10, 0.72) 100%);
+}
+
+/* ---------- cursor glow (desktop pointers only; created in index.html) ------ */
+.cursor-glow {
+  position: fixed; left: 0; top: 0; z-index: 0;
+  width: 560px; height: 560px; margin: -280px 0 0 -280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.14), rgba(63, 143, 97, 0.045) 44%, transparent 70%);
+  pointer-events: none;
+  opacity: 0; transition: opacity 0.6s ease;
+  will-change: transform;
+}
+.cursor-glow.is-on { opacity: 1; }
+
+/* ---------- scroll reveal ---------------------------------------------------- *
+   Content is only hidden when JS is running (html.js). The entrance is a CSS
+   animation with fill-mode "backwards", so once it finishes the element returns
+   to its normal styles and hover transforms keep working.                    */
+.js .reveal { opacity: 0; }
+.js .reveal.is-visible {
+  opacity: 1;
+  animation: reveal-in 0.9s var(--ease-out) backwards;
+  animation-delay: calc(var(--i, 0) * 90ms);
+}
+@keyframes reveal-in {
+  from { opacity: 0; transform: translateY(20px); }
+}
+
+/* ---------- reduced motion --------------------------------------------------- *
+   Keeps every feature usable, but removes movement:
+   no parallax / tilt (also disabled in JS), no drifting light, no reveal motion. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
+  }
+  .js .reveal { opacity: 1; }
+  .cursor-glow { display: none; }
+  .profile-card { will-change: auto; }
+  .lift:hover, .btn:hover { transform: none; }
+}

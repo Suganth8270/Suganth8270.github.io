@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <!-- ▶ EDIT: search-engine and link-preview text. (On-page text lives in js/profile-data.js.) -->
+  <title>Suganth S — B.Tech Biotechnology · Bioinformatics &amp; Software</title>
+  <meta name="description" content="Suganth S is a B.Tech Biotechnology student exploring bioinformatics and software development. Projects: ProMatDb and BioPouch.">
+  <meta name="theme-color" content="#040810">
+  <meta name="color-scheme" content="dark">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Suganth S — Biotechnology × Software">
+  <meta property="og:description" content="B.Tech Biotechnology student exploring bioinformatics and software development.">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+  <!-- Fonts (Google Fonts). If they cannot load, the fallback stacks in css/base.css are used. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/glass.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/effects.css">
+
+  <!-- Classic scripts (not ES modules) so index.html also works when opened directly from disk. Order matters. -->
+  <script src="js/profile-data.js" defer></script>
+  <script src="js/components.js" defer></script>
+  <script src="js/github.js" defer></script>
+  <script src="js/background.js" defer></script>
+  <script src="js/effects.js" defer></script>
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Atmosphere: decorative only -->
+  <div class="bg" aria-hidden="true">
+    <div class="bg__orb bg__orb--a"></div>
+    <div class="bg__orb bg__orb--b"></div>
+    <div class="bg__orb bg__orb--c"></div>
+    <div class="bg__grid" id="bg-grid"></div>
+    <canvas id="bg-canvas"></canvas>
+    <div class="bg__vignette"></div>
+  </div>
+  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+
+  <nav class="nav" aria-label="Primary">
+    <a class="nav__brand" href="#top"><span data-bind="name">Suganth G</span></a>
+    <a class="nav__link" href="#about">About</a>
+    <a class="nav__link" href="#skills">Skills</a>
+    <a class="nav__link" href="#projects">Projects</a>
+    <a class="nav__link" href="#github">GitHub</a>
+  </nav>
+
+  <main id="main">
+
+    <!-- ============================== HERO ============================== -->
+    <section class="hero" id="top" aria-label="Introduction">
+      <div class="hero__stage" id="hero-stage">
+        <article class="profile-card" id="profile-card">
+          <!-- glass layers (decorative) -->
+          <div class="profile-card__aurora" aria-hidden="true"><span class="aurora__blob"></span><span class="aurora__blob"></span><span class="aurora__blob"></span></div>
+          <div class="profile-card__pane" aria-hidden="true"></div>
+          <div class="profile-card__glow" aria-hidden="true"></div>
+          <div class="profile-card__sheen" aria-hidden="true"></div>
+          <div class="profile-card__rim" aria-hidden="true"></div>
+          <!-- content is rendered by js/main.js from js/profile-data.js -->
+          <div class="profile-card__content" id="hero-content">
+            <noscript>
+              <div class="identity">
+                <h1 class="identity__name">Suganth S</h1>
+                <p class="identity__role">B.Tech Biotechnology</p>
+                <p class="identity__bio">JavaScript is needed to display this page. GitHub: <a href="https://github.com/Suganth8270">@Suganth8270</a></p>
+              </div>
+            </noscript>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ==============================  ============================= -->
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="container">
+        <h2 class="section__title reveal" id="about-title">About</h2>
+        <div class="about" id="about-mount"></div>
+      </div>
+    </section>
+
+    <!-- ============================== SKILLS ============================ -->
+    <section class="section" id="skills" aria-labelledby="skills-title">
+      <div class="container">
+        <h2 class="section__title reveal" id="skills-title">Skills</h2>
+        <div class="skills" id="skills-mount"></div>
+      </div>
+    </section>
+
+    <!-- ============================== PROJECTS ========================== -->
+    <section class="section" id="projects" aria-labelledby="projects-title">
+      <div class="container">
+        <h2 class="section__title reveal" id="projects-title">Projects</h2>
+        <div class="projects" id="projects-mount"></div>
+      </div>
+    </section>
+
+    <!-- ============================== GITHUB ============================ -->
+    <section class="section" id="github" aria-labelledby="github-title">
+      <div class="container">
+        <h2 class="section__title reveal" id="github-title">GitHub</h2>
+        <div id="github-mount"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner" id="footer-mount"></div>
+  </footer>
+</body>
+</html>
